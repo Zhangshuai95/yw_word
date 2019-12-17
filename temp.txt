@@ -1,0 +1,51 @@
+
+
+
+
+scene_name: bookshelf_recommand
+scheduler_name: bookshelf_recommand
+
+      - scene_name: bookshelf_goodbook
+        divider_type: qimeitail
+        flows:
+          #tail:[0, 1, 2..., 9]
+          #random:[0, 50] (hash(guid) % mod)
+          #set:[guid_1, guid_2, ..., guid_n]
+            - flow_id: 904
+              flow_type: base
+              divider_range: []
+              scheduler_name: bookshelf_goodbook
+
+- schedule_name: bookshelf_goodbook
+  #if one task failed ignore and continue to process others  
+  #1 : ignore, 
+  #0 : stop 
+  ignore_failure: 0
+  tasks:
+      - task_name: user_feature_task_base
+      - task_name: user_data_task_base
+      - task_name: recall_c2v4_user_newbie
+      - task_name: makeblock_bookshelf_goodbook
+      - task_name: save_exposed_data
+      - task_name: make_tmr_bookshelf_goodbook_log
+
+
+- schedule_name: bookshelf_recommend
+  #if one task failed ignore and continue to process others  
+  #1 : ignore, 
+  #0 : stop 
+  ignore_failure: 0
+  tasks:
+      - task_name: user_feature_task_base
+      - task_name: user_data_task_base
+      - task_name: recall_c2v4_user_newbie
+      - task_name: makeblock_bookshelf_recommend
+      - task_name: save_exposed_data
+      - task_name: make_tmr_bookshelf_goodbook_log
+
+
+
+
+
+struct<long,vector<struct<long,vector<struct<long,float,int,struct<string,long,int>,map<string,string>,int,string>>,map<string,string>,int,int,string,string>>>=
+<272748001,<<0,<<26396004,100.0,1000000,<,0,0>,[isnewbie=1,source_key=source_newbie],0,110.5.1#6#>>,[,1,1,书架页好书推荐一本,书架页好书推荐一本>>>
